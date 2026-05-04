@@ -10,7 +10,7 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
 from wagtail.admin.panels import FieldPanel
-
+from wagtail.api import APIField   
 
 class HomePage(Page):
     pass
@@ -37,5 +37,12 @@ class BlogPage(Page):
         FieldPanel('author_name'),
         FieldPanel('subtitle'),
         FieldPanel('body'),
+    ]
+    
+    api_fields = [
+        APIField('date'),
+        APIField('author_name'),
+        APIField('subtitle'),
+        APIField('body'),
     ]
 
