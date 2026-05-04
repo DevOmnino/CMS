@@ -1,0 +1,40 @@
+{% load  static %}
+{% load wagtailcore_tags  wagtailimages_tags %}
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ page.title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+    </head>
+
+    <body>
+        <!-- Masthead -->
+    <header>
+        <a class="logo" href="#">Logo</a>
+        <nav>
+        <a href="#">Home</a>
+        <a href="#">Stories</a>
+        <a href="#">About</a>
+        {% comment %} <a href="#">Subscribe</a> {% endcomment %}
+        </nav>
+    </header>  
+    {% block content %}  
+    
+    
+    {% endblock %}
+
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
+
+    <footer>
+        &copy; 2026  &nbsp;·&nbsp; All rights reserved
+    </footer>
+
+    </body>
+</html>

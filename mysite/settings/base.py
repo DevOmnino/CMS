@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    "wagtailmarkdown",
+    
     "modelcluster",
     "taggit",
     "django_filters",

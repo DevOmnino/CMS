@@ -1,0 +1,94 @@
+{% extends "master.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags wagtailmarkdown %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero -->
+  <div class="hero">
+    <span class="category-tag">Design &amp; Culture</span>
+    <h1> {{ page.title|richtext }} </h1>
+    <div class="subtitle">
+      {{ page.subtitle|richtext }}
+    </div>
+
+    <!-- Meta strip -->
+    <div class="meta-strip">
+      <div class="author-block">
+        {% comment %} <div class="avatar">M</div> {% endcomment %}
+        <div class="avatar"> {{ page.author_name|richtext|slice:"26:27"}} </div>
+
+        <div>
+          <div class="author-name">{{ page.author_name|richtext }}</div>
+          <div class="author-role">Senior Writer</div>
+        </div>
+      </div>
+
+      <div class="meta-divider"></div>
+
+      <div class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        {{ page.date}}
+      </div>
+
+      <div class="meta-divider"></div>
+
+      <div class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        7 min read
+      </div>
+    </div>
+  </div>
+
+<article>
+    {% for block in page.body%}
+
+        {% if block.block_type == 'paragraph' %}
+            {{ block.value }}
+        {% elif block.block_type == 'image' %}
+            <div class="featured-image-wrap">
+                <div class="image-placeholder">
+                    {% image block.value original as img %}
+                    <img src="{{ img.url }}" alt="{{ img.alt }}">
+                </div>
+                {% if block.value.description %}
+                    <div class="image-caption"> {{ block.value.description }} </div>
+                {% endif %}
+            </div>
+        {% elif block.block_type == 'heading' %}
+            <h2>{{ block.value }}</h2>
+        {% elif block.block_type == 'blockquote' %}
+            <blockquote><p>{{ block.value }}</p></blockquote>
+        {% elif block.block_type == 'code' %}
+            <pre><code>{{ block.value }}</code></pre>
+        {% elif block.block_type == 'markdown' %}
+            {{ block.value|markdown }} 
+        {% elif block.block_type == 'embed' %}
+            {{ block.value }}
+        {% elif block.block_type == 'highlight' %}
+            <p><strong>{{ block.value }}</strong></p>
+        {% elif block.block_type == 'document' %}
+            <a href="{{ block.value.url }}">{{ block.value.title }}</a>
+        {% endif %}
+
+    {% endfor %}
+
+    <!-- Tags -->
+    <div class="tags">
+      <span class="tag">Mindfulness</span>
+      <span class="tag">Digital Wellness</span>
+      <span class="tag">Culture</span>
+      <span class="tag">Creativity</span>
+      <span class="tag">Slowness</span>
+    </div>
+</article>
+
+{% endblock content %}
